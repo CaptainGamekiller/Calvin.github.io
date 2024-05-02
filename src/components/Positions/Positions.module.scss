@@ -1,0 +1,103 @@
+// 匯入共用樣式變數和混合宏
+@import '../../styles/contants.scss';
+
+// .wrapper類別的樣式定義
+.wrapper{
+    background: white; // 背景色設為白色
+    overflow: hidden; // 超出部分隱藏，防止內容溢出顯示框
+    
+    // .container是.wrapper的子元素樣式定義
+    .container{
+        flex-direction: column; // 子元素垂直排列
+        gap: 2rem; // 子元素之間設置2rem的間隔
+        
+        // .heading是.container的子元素樣式定義
+        .heading{
+            width: 100%; // 寬度設置為100%
+            justify-content: space-between; // 子元素間隔均勻分布
+            align-items: flex-end; // 子元素在交叉軸的末端對齊
+            flex-wrap: wrap; // 超出容器範圍會換行
+            /* 我自己加的，要把Title置中*/
+            > :first-child {
+                width: 100%; // 讓第一個子元素的寬度為100%，這樣文本才能在其容器內居中
+                text-align: center; // 文本居中對齊
+            }
+        
+            // 直接子元素中的第二個子元素的樣式定義
+            >:nth-child(2)
+            {
+                text-decoration: underline; // 文字下劃線
+                color: orange; // 文字顏色為橙色
+                cursor: pointer; // 鼠標懸停時顯示指針型態
+            }
+        }    
+        
+        // .showCase是.container的子元素樣式定義
+        
+        .showCase{
+            width: 100%; // 寬度設置為100%
+            gap: 1.5rem; // 子元素之間設置1.5rem的間隔
+            justify-content: space-around; // 子元素在主軸線的空間均勻分布，兩端會有空間
+            flex-wrap: wrap; // 超出容器範圍會換行
+
+            
+            // .showCase直接子元素img的樣式定義
+            >img{
+                // 當螢幕寬度小於$sm變數定義的值時適用以下樣式
+                @media (max-width: $sm) {
+                    width: 100%; // 寬度設置為100%
+                }
+                border-radius: 20px; // 圓角邊框設為20px
+                max-width: 25rem; // 最大寬度限制為25rem
+                max-height: 18rem; // 最大高度限制為18rem
+                box-shadow: 0px 21px 13px rgba(0, 0, 0, 13%); // 設置陰影效果
+                cursor: pointer; // 鼠標懸停時顯示指針型態
+            }
+        }
+    }
+}
+
+
+
+/*原版未註釋
+@import '../../styles/contants.scss';
+
+.wrapper{
+    background: white;
+    overflow: hidden;
+    .container{
+        flex-direction: column;
+        gap: 2rem;
+        .heading{
+            width: 100%;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-wrap: wrap; 
+            >:nth-child(2)
+            {
+                text-decoration: underline;
+                color: orange;
+                cursor: pointer;
+            }
+        }    
+        
+        .showCase{
+            width: 100%;
+            gap: 1.5rem;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            >img{
+
+                @media (max-width: $sm) {
+                    width: 100%;
+                }
+                border-radius: 20px;
+                max-width: 25rem;
+                max-height: 18rem;
+                box-shadow: 0px 21px 13px rgba(0, 0, 0, 13%);
+                cursor: pointer;
+            }
+        }
+    }
+}
+*/

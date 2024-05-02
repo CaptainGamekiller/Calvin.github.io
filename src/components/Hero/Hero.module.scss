@@ -1,0 +1,181 @@
+@import '../../styles/contants.scss';
+
+.wrapper {
+    overflow: hidden;
+
+    .container {
+        position: relative;
+        z-index: 1;
+
+        .upperElements {
+            @media (max-width: $sm) {
+                justify-content: center;
+                text-align: center;
+                gap: 2rem;
+            }
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        .experience {
+            display: flex;
+            flex-direction: row; // align children in a row
+            align-items: center; // vertically center the items
+            gap: 0.5rem; // adjust the gap as needed
+          
+            > div {
+              &:first-child {
+                font-size: 3rem; // adjust the size as needed
+              }
+          
+              &:nth-child(2) {
+                display: flex;
+                flex-direction: column; // stack "Years" and "Experience" vertically
+              }
+            }
+          }
+          
+
+        /*原版
+        .lowerElements {
+            @media (max-width: $sm), (max-width: $md) {
+                margin-top: 4rem;
+                gap: 2rem;
+                justify-content: center;
+            }
+            margin-top: 12rem;
+            display: flex;
+            flex-wrap: wrap;// 允許元素換行
+            justify-content: space-between;// 確保元素分布在容器的兩端
+            .experience {
+                //display: flex;
+                align-items: center;// 垂直居中
+                gap: 1rem;
+                >:nth-child(2) {
+                    line-height: 25px;
+                }
+            }
+            .certificate {
+                display: flex;
+                flex-direction: column; // 較小屏幕堆疊元素
+                align-items: center; // 在堆疊排列時使元素居中
+                img {
+                    margin-bottom: 1rem;
+                    width: 3.5rem;
+                }
+            }
+            */
+            .lowerElements {
+                display: flex;//原版
+                align-items: center;// 垂直居中
+                justify-content: space-between; // 確保元素分布在容器的兩端
+                flex-wrap: wrap;// 允許元素換行
+                gap: 2rem;
+                @media (max-width: $sm), (max-width: $md) {
+                  flex-direction: column; // 較小屏幕堆疊元素
+                  align-items: center; // 在堆疊排列時使元素居中
+                  margin-top: 4rem;
+                }
+                @media (min-width: $md) {
+                    // 設置 lowerElements 在較大螢幕上的絕對定位
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                }
+                .experience {
+                    display: flex;
+                    align-items: center;// 垂直居中
+                    gap: 1rem;
+                    >:nth-child(2) {
+                        line-height: 25px;
+                    }
+                }
+                .certificate {
+                    display: flex;
+                    flex-direction: column; // 較小屏幕堆疊元素
+                    align-items: center; // 在堆疊排列時使元素居中
+                    // 讓圖片和文字基於視口寬度縮放，保持響應式設計
+                    img {
+                        margin-bottom: 1rem;
+                        width: 10vw; //原版3.5rem，將圖片寬度設置為視口寬度的30%
+                        //width: 10rem;
+                        //height: auto; // 保持圖片的高寬比
+                    }
+                }
+        }
+
+        /*原版：
+        .person {
+            @media (max-width: $sm ), (max-width: $md) {
+                position: relative;
+                left: 0;
+                background-size: 20rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-position: bottom;
+            }
+            position: absolute;
+            bottom: -2rem;
+            margin: auto;
+            background-image: url("../splash.png");
+            background-repeat: no-repeat;
+            background-size: 23rem;//背景圖片的寬度為 23 個 rem
+            left: 33%;
+
+            img {
+                @media (max-width: $sm ) {
+                    width: 23rem;//人像照片img的寬度為23 rem
+                }
+                margin-bottom: -5px;
+            }
+        }
+        */
+        $largeScreenWidth: 3840px; // 假設$4K的屏幕寬度為3840px
+        .person {
+            @media (max-width: $sm ), (max-width: $md),(max-width: $lg ), (max-width: $xl), (max-width: $xxl ), (max-width: $largeScreenWidth)  {
+                //以下原版////////////////////////////////////////
+                position: relative;
+                left: 0;
+                background-size: 40vw; //原版：用20rem，背景圖片的縮放
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-position: center; //原版是buttom，在小屏幕上保持背景居中
+                //以上原版////////////////////////////////////////
+                order: 2; // 新增這一行，確保在小屏幕上 person 在 experience 下面
+                height: auto; // 在小屏幕上讓高度自動調整
+                width: auto; // 在小屏幕上讓高度自動調整
+            }
+            //以下原版////////////////////////////////////////
+            position: absolute;
+            //bottom: -2rem; //圖片(兩張一起算)的y軸位置
+            margin: auto;
+            background-image: url("../splash2.png");
+            background-repeat: no-repeat;
+            background-size: 23rem;//背景圖片的寬度為 23 個 rem
+            left: 33%;
+            //以上原版////////////////////////////////////////
+            bottom: -3vw; // 使用視窗寬度的百分比來定位人像背景的y軸位置(底部位置)
+            img {
+                @media(max-width: $sm ), (max-width: $md),(max-width: $lg ), (max-width: $xl), (max-width: $xxl ), (max-width: $largeScreenWidth) {
+                width: 26vw; // 原版為23rem，使用視窗寬度的百分比來設置人像寬度
+                }
+                //margin-bottom: -100px; //原版-5px，人像的y軸位置，我想要底部和背景圖片切齊
+            }
+        }
+        
+        .email {
+            @media (max-width: $sm ) {
+                position: relative;
+                display: none;
+            }
+            position: absolute;
+            top: 50%;
+            left: 0;
+            color: #008631;
+        }
+    }
+}
